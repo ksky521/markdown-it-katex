@@ -151,7 +151,10 @@ function math_block(state, start, end, silent){
     token.markup = '$$';
     return true;
 }
-
+function cleanString(html){
+    html = html.replace(/[^\w\s]/gi, '')
+    return html;
+}
 module.exports = function math_plugin(md, options) {
     // Default options
 
@@ -165,7 +168,7 @@ module.exports = function math_plugin(md, options) {
         }
         catch(error){
             if(options.throwOnError){ console.log(error); }
-            return latex;
+            return cleanString(latex);
         }
     };
 
@@ -180,7 +183,7 @@ module.exports = function math_plugin(md, options) {
         }
         catch(error){
             if(options.throwOnError){ console.log(error); }
-            return latex;
+            return cleanString(latex);
         }
     }
 
